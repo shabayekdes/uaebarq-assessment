@@ -22,10 +22,10 @@
                 <h3 class="card-title">List</h3>
               </div>
               <div class="col-sm-12 col-md-7">
-                <!-- <router-link :to="{ name: 'product.create' }" class="btn btn-success float-right">
+                <router-link :to="{ name: 'video.create' }" class="btn btn-success float-right">
                   Add New
                   <i class="fas fa-cart-plus"></i>
-                </router-link> -->
+                </router-link>
               </div>
             </div>
           </div>

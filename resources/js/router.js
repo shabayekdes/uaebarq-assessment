@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import Dashboard from "@Admin/pages/Dashboard";
 import ListVideos from "@Admin/pages/video/List";
+import CreateVideo from "@Admin/pages/video/Create";
 
 const routes = [
     {
@@ -16,6 +17,11 @@ const routes = [
         path: "/admin/videos",
         name: "videos.index",
         component: ListVideos
+    },
+    {
+        path: "/admin/video/create",
+        name: "video.create",
+        component: CreateVideo
     }
 ];
 
