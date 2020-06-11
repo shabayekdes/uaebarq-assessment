@@ -2189,28 +2189,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2234,23 +2212,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         active: true
       }, {
         width: "23%",
-        label: "Name",
-        name: "name",
+        label: "Keyword",
+        name: "keyword",
         active: true
       }, {
         width: "15%",
-        label: "Price",
-        name: "price",
+        label: "Type",
+        name: "type",
         active: true
       }, {
         width: "20%",
-        label: "Quantity",
-        name: "qty",
+        label: "Created By",
+        name: "created_by",
         active: true
       }, {
         width: "15%",
-        label: "Status",
-        name: "status",
+        label: "Notification",
+        name: "is_send_notification",
         active: true
       }, {
         width: "18%",
@@ -38815,204 +38793,206 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "content" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c(
-              "div",
-              {
-                staticClass: "dataTables_wrapper dt-bootstrap4",
-                attrs: { id: "example1_wrapper" }
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-sm-12" },
-                    [
+  return _c(
+    "div",
+    {
+      staticClass: "content-wrapper",
+      staticStyle: { "min-height": "971.94px" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "dataTables_wrapper dt-bootstrap4",
+                    attrs: { id: "example1_wrapper" }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
                       _c(
-                        "datatable",
-                        {
-                          attrs: {
-                            columns: _vm.columns,
-                            length: _vm.getAllVideos.length
-                          }
-                        },
-                        _vm._l(_vm.getAllVideos, function(product) {
-                          return _c(
-                            "tr",
+                        "div",
+                        { staticClass: "col-sm-12" },
+                        [
+                          _c(
+                            "datatable",
                             {
-                              key: product.id,
-                              staticClass: "odd",
-                              attrs: { role: "row" }
+                              attrs: {
+                                columns: _vm.columns,
+                                length: _vm.getAllVideos.length
+                              }
                             },
-                            [
-                              _c("td", { staticClass: "sorting_1" }, [
-                                _vm._v(_vm._s(product.id))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                product.thumbnail == null
-                                  ? _c("img", {
-                                      staticClass:
-                                        "img-circle img-size-64 mr-2",
-                                      attrs: {
-                                        src: "/img/default-150x150.png",
-                                        alt: "Product"
-                                      }
-                                    })
-                                  : _c("img", {
-                                      staticClass:
-                                        "img-circle img-size-64 mr-2",
-                                      attrs: {
-                                        src: product.thumbnail,
-                                        alt: "Product"
-                                      }
-                                    })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(_vm._s(_vm._f("slug")(product.name)))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(product.price))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(product.qty))]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "project-state text-center" },
+                            _vm._l(_vm.getAllVideos, function(video) {
+                              return _c(
+                                "tr",
+                                {
+                                  key: video.id,
+                                  staticClass: "odd",
+                                  attrs: { role: "row" }
+                                },
                                 [
+                                  _c("td", { staticClass: "sorting_1" }, [
+                                    _vm._v(_vm._s(video.id))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    video.image_url == null
+                                      ? _c("img", {
+                                          staticClass:
+                                            "img-circle img-size-64 mr-2",
+                                          attrs: {
+                                            src: "/img/default-150x150.png",
+                                            alt: "Product"
+                                          }
+                                        })
+                                      : _c("img", {
+                                          staticClass:
+                                            "img-circle img-size-64 mr-2",
+                                          attrs: {
+                                            src: video.image_url,
+                                            alt: "Product"
+                                          }
+                                        })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(video.keyword))]),
+                                  _vm._v(" "),
                                   _c(
-                                    "span",
+                                    "td",
                                     {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: product.status,
-                                          expression: "product.status"
-                                        }
-                                      ],
-                                      staticClass: "badge badge-success"
+                                      staticClass: "project-state text-center"
                                     },
-                                    [_vm._v("Active")]
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "badge badge-primary" },
+                                        [_vm._v(_vm._s(video.type))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(video.created_by))]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "project-state text-center"
+                                    },
+                                    [
+                                      _c(
+                                        "span",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: video.is_send_notification,
+                                              expression:
+                                                "video.is_send_notification"
+                                            }
+                                          ],
+                                          staticClass: "badge badge-success"
+                                        },
+                                        [_vm._v("Send")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: !video.is_send_notification,
+                                              expression:
+                                                "!video.is_send_notification"
+                                            }
+                                          ],
+                                          staticClass: "badge badge-warning"
+                                        },
+                                        [_vm._v("Not send")]
+                                      )
+                                    ]
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "span",
+                                    "td",
                                     {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: !product.status,
-                                          expression: "!product.status"
-                                        }
-                                      ],
-                                      staticClass: "badge badge-warning"
+                                      staticClass: "project-actions text-right"
                                     },
-                                    [_vm._v("Non-Active")]
+                                    [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c("div", {
+                                          staticClass: "col-sm-3 border-right"
+                                        }),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-sm-3" }, [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-danger btn-xs",
+                                              attrs: { href: "#" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteVideo(
+                                                    video.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-trash"
+                                              })
+                                            ]
+                                          )
+                                        ])
+                                      ])
+                                    ]
                                   )
                                 ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "project-actions text-right" },
-                                [
-                                  _c("div", { staticClass: "row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-sm-3 border-right" },
-                                      [
-                                        _c(
-                                          "a",
-                                          {
-                                            staticClass:
-                                              "btn btn-primary btn-xs",
-                                            attrs: {
-                                              href: "/store/" + product.slug
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-folder"
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", {
-                                      staticClass: "col-sm-3 border-right"
-                                    }),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "col-sm-3" }, [
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "btn btn-danger btn-xs",
-                                          attrs: { href: "#" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.deleteProduct(
-                                                product.id
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass: "fas fa-trash"
-                                          })
-                                        ]
-                                      )
-                                    ])
-                                  ])
-                                ]
                               )
-                            ]
+                            }),
+                            0
                           )
-                        }),
-                        0
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("pagination", {
-                  attrs: { meta_data: _vm.getMetaData },
-                  on: { next: _vm.fetchListVideos }
-                })
-              ],
-              1
-            )
+                    ]),
+                    _vm._v(" "),
+                    _c("pagination", {
+                      attrs: { meta_data: _vm.getMetaData },
+                      on: { next: _vm.fetchListVideos }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
           ])
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-12 col-md-5" }, [
-          _c("h3", { staticClass: "card-title" }, [_vm._v("Products List")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-12 col-md-7" })
+    return _c("section", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [_c("h1", [_vm._v("Videos")])])
+        ])
       ])
     ])
   },
@@ -39020,65 +39000,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12 col-md-6" }, [
-        _c(
-          "div",
-          {
-            staticClass: "dataTables_length",
-            attrs: { id: "example1_length" }
-          },
-          [
-            _c("label", [
-              _vm._v(
-                "\n                    Show entries\n                    "
-              ),
-              _c(
-                "select",
-                {
-                  staticClass:
-                    "custom-select custom-select-sm form-control form-control-sm",
-                  attrs: {
-                    name: "example1_length",
-                    "aria-controls": "example1"
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "25" } }, [_vm._v("25")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "100" } }, [_vm._v("100")])
-                ]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-12 col-md-6" }, [
-        _c(
-          "div",
-          {
-            staticClass: "dataTables_filter float-right",
-            attrs: { id: "example1_filter" }
-          },
-          [
-            _c("label", [
-              _vm._v("\n                    Search:\n                    "),
-              _c("input", {
-                staticClass: "form-control form-control-sm",
-                attrs: {
-                  type: "search",
-                  placeholder: "",
-                  "aria-controls": "example1"
-                }
-              })
-            ])
-          ]
-        )
+    return _c("div", { staticClass: "card-header" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-12 col-md-5" }, [
+          _c("h3", { staticClass: "card-title" }, [_vm._v("List")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-12 col-md-7" })
       ])
     ])
   }
@@ -55972,11 +55900,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var state = {
-  videos: []
+  videos: [],
+  video: {}
 };
 var getters = {
   getAllVideos: function getAllVideos(state) {
-    return state.products;
+    return state.videos;
   }
 };
 var actions = {

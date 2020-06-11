@@ -1,9 +1,10 @@
 const state = {
-    videos: []
+    videos: [],
+    video: {}
 };
 
 const getters = {
-    getAllVideos: state => state.products,
+    getAllVideos: state => state.videos,
 };
 
 const actions = {

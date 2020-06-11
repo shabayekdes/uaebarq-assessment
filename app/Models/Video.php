@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Video extends Model
 {
@@ -15,6 +16,6 @@ class Video extends Model
 
     public function user()
     {
-        return belongTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
 }
