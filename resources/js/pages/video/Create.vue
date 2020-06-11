@@ -21,23 +21,15 @@
                 @submit.prevent="createVideo"
                 enctype="multipart/form-data"
             >
-                <div class="form-group">
-                    <label>Type</label>
-                    <select
-                    name="parent_id"
-                    id="parent_id"
-                    class="custom-select"
-                    >
-                    <option value>Select one</option>
-                    </select>
-                </div>
+
                 <div class="row mb-3">
                     <div class="col-md-4 offset-md-4">
                     <img
                         class="img-thumbnail mx-auto"
                         width="200"
                         height="200"
-                        alt="image"
+                        :src="getThumb.url"
+                        alt="user image"
                     />
                     </div>
                 </div>
@@ -45,28 +37,42 @@
                 <div class="custom-file mb-3">
                     <input
                     type="file"
+                    @change="addThumb"
                     class="custom-file-input"
                     id="validatedCustomFile"
                     />
-                    <label class="custom-file-label" for="inputGroupFile02"></label>
+                    <label class="custom-file-label" for="inputGroupFile02">{{ truncate(getThumb.name,20) }}</label>
                 </div>
-
-                <div class="form-group">
-                    <label for="inputDescription">Keyword</label>
-                    <textarea
-                    id="inputDescription"
-                    class="form-control"
-                    rows="4"
-                    ></textarea>
-                </div>
-
+                
                 <div class="custom-file mb-3">
-                    <input
-                    type="file"
-                    class="custom-file-input"
-                    id="validatedCustomFile"
-                    />
-                    <label class="custom-file-label" for="inputGroupFile02">Upload Video</label>
+                    <input type="file" id="file" @change="onInputChange" />
+                    <label class="custom-file-label" for="file">Upload Video</label>
+                </div>
+
+                <div class="form-group row">
+                    <label for="type" class="col-sm-4 col-form-label">Type:</label>
+                    <div class="col-sm-8">
+                        <select
+                            id="type"
+                            v-model="getSingleVideo.type"
+                            class="custom-select">
+                            <option disabled>Select one</option>
+                            <option value="free">Free</option>
+                            <option value="payed">Payed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="keyword" class="col-sm-4 col-form-label">Keyword:</label>
+                    <div class="col-sm-8">
+                        <input
+                            type="text"
+                            v-model="getSingleVideo.keyword"
+                            class="form-control"
+                            placeholder="Enter keyword"
+                            id="keyword"/>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -96,11 +102,28 @@ export default {
   },
   methods: {
     ...mapActions([
+        "storeVideo",
+        "addThumb",
+        "addFile"
     ]),
     createVideo(){
-
-    }
+        const formData = new FormData();
+        for (const [key, value] of Object.entries(this.getSingleVideo)) {
+            formData.append(key, value);
+        }
+        this.getFiles.forEach(file => {
+            formData.append("video_url", file, file.name);
+        });
+        if (this.getThumb.file) {
+            formData.append("image_url", this.getThumb.file);
+        }
+        this.storeVideo(formData);
+    },
+    onInputChange(e) {
+      const files = e.target.files;
+      this.addFile(files[0]);
+    },
   },
-  computed: mapGetters([])
+  computed: mapGetters(["getSingleVideo", "getThumb", "getFiles"])
 };
 </script>

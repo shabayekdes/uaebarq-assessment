@@ -2070,6 +2070,18 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2163,16 +2175,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CreateVideo",
   data: function data() {
     return {};
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])([])), {}, {
-    createVideo: function createVideo() {}
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["storeVideo", "addThumb", "addFile"])), {}, {
+    createVideo: function createVideo() {
+      var formData = new FormData();
+
+      for (var _i = 0, _Object$entries = Object.entries(this.getSingleVideo); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            key = _Object$entries$_i[0],
+            value = _Object$entries$_i[1];
+
+        formData.append(key, value);
+      }
+
+      this.getFiles.forEach(function (file) {
+        formData.append("video_url", file, file.name);
+      });
+
+      if (this.getThumb.file) {
+        formData.append("image_url", this.getThumb.file);
+      }
+
+      this.storeVideo(formData);
+    },
+    onInputChange: function onInputChange(e) {
+      var files = e.target.files;
+      this.addFile(files[0]);
+    }
   }),
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])([])
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getSingleVideo", "getThumb", "getFiles"])
 });
 
 /***/ }),
@@ -38936,15 +38978,156 @@ var render = function() {
                     }
                   },
                   [
-                    _vm._m(1),
+                    _c("div", { staticClass: "row mb-3" }, [
+                      _c("div", { staticClass: "col-md-4 offset-md-4" }, [
+                        _c("img", {
+                          staticClass: "img-thumbnail mx-auto",
+                          attrs: {
+                            width: "200",
+                            height: "200",
+                            src: _vm.getThumb.url,
+                            alt: "user image"
+                          }
+                        })
+                      ])
+                    ]),
                     _vm._v(" "),
-                    _vm._m(2),
+                    _c("div", { staticClass: "custom-file mb-3" }, [
+                      _c("input", {
+                        staticClass: "custom-file-input",
+                        attrs: { type: "file", id: "validatedCustomFile" },
+                        on: { change: _vm.addThumb }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-file-label",
+                          attrs: { for: "inputGroupFile02" }
+                        },
+                        [_vm._v(_vm._s(_vm.truncate(_vm.getThumb.name, 20)))]
+                      )
+                    ]),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _c("div", { staticClass: "custom-file mb-3" }, [
+                      _c("input", {
+                        attrs: { type: "file", id: "file" },
+                        on: { change: _vm.onInputChange }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-file-label",
+                          attrs: { for: "file" }
+                        },
+                        [_vm._v("Upload Video")]
+                      )
+                    ]),
                     _vm._v(" "),
-                    _vm._m(4),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 col-form-label",
+                          attrs: { for: "type" }
+                        },
+                        [_vm._v("Type:")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.getSingleVideo.type,
+                                expression: "getSingleVideo.type"
+                              }
+                            ],
+                            staticClass: "custom-select",
+                            attrs: { id: "type" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.getSingleVideo,
+                                  "type",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { disabled: "" } }, [
+                              _vm._v("Select one")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "free" } }, [
+                              _vm._v("Free")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "payed" } }, [
+                              _vm._v("Payed")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
                     _vm._v(" "),
-                    _vm._m(5),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 col-form-label",
+                          attrs: { for: "keyword" }
+                        },
+                        [_vm._v("Keyword:")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.getSingleVideo.keyword,
+                              expression: "getSingleVideo.keyword"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Enter keyword",
+                            id: "keyword"
+                          },
+                          domProps: { value: _vm.getSingleVideo.keyword },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.getSingleVideo,
+                                "keyword",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c(
                       "button",
@@ -38986,85 +39169,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Type")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass: "custom-select",
-          attrs: { name: "parent_id", id: "parent_id" }
-        },
-        [_c("option", { attrs: { value: "" } }, [_vm._v("Select one")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-3" }, [
-      _c("div", { staticClass: "col-md-4 offset-md-4" }, [
-        _c("img", {
-          staticClass: "img-thumbnail mx-auto",
-          attrs: { width: "200", height: "200", alt: "image" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-file mb-3" }, [
-      _c("input", {
-        staticClass: "custom-file-input",
-        attrs: { type: "file", id: "validatedCustomFile" }
-      }),
-      _vm._v(" "),
-      _c("label", {
-        staticClass: "custom-file-label",
-        attrs: { for: "inputGroupFile02" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "inputDescription" } }, [_vm._v("Keyword")]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "inputDescription", rows: "4" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-file mb-3" }, [
-      _c("input", {
-        staticClass: "custom-file-input",
-        attrs: { type: "file", id: "validatedCustomFile" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-file-label",
-          attrs: { for: "inputGroupFile02" }
-        },
-        [_vm._v("Upload Video")]
-      )
     ])
   }
 ]
@@ -55646,12 +55750,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
+  methods: {
+    truncate: function truncate(str, no_word) {
+      return str.substr(0, no_word) + "...";
+    }
+  }
+});
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#app",
   router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -56181,7 +56286,7 @@ var state = {
   images: [],
   thumb: {
     name: "Choose Image ...",
-    url: "/img/img-placeholder.png",
+    url: "/images/img-placeholder.png",
     file: ""
   }
 };
@@ -56197,13 +56302,8 @@ var getters = {
   }
 };
 var actions = {
-  addImage: function addImage(_ref, file) {
+  addFile: function addFile(_ref, file) {
     var state = _ref.state;
-
-    if (!file.type.match("image.*")) {
-      return;
-    }
-
     state.files.push(file);
     var img = new Image(),
         reader = new FileReader();
@@ -56253,7 +56353,7 @@ var actions = {
     state.images = [];
     state.thumb = {
       name: "Choose Image ...",
-      url: "/img/img-placeholder.png",
+      url: "/images/img-placeholder.png",
       file: ""
     };
   }

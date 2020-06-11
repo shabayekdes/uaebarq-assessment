@@ -3,7 +3,7 @@ const state = {
     images: [],
     thumb: {
         name: "Choose Image ...",
-        url: "/img/img-placeholder.png",
+        url: "/images/img-placeholder.png",
         file: ""
     }
 };
@@ -15,10 +15,7 @@ const getters = {
 };
 
 const actions = {
-    addImage({ state }, file) {
-        if (!file.type.match("image.*")) {
-            return;
-        }
+    addFile({ state }, file) {
         state.files.push(file);
         const img = new Image(),
             reader = new FileReader();
@@ -57,7 +54,7 @@ const actions = {
         state.images = [];
         state.thumb = {
             name: "Choose Image ...",
-            url: "/img/img-placeholder.png",
+            url: "/images/img-placeholder.png",
             file: ""
         };
     }
