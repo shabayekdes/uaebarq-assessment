@@ -12,4 +12,9 @@ class Video extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function user()
+    {
+        return belongTo(User::class, 'created_by');
+    }
 }
