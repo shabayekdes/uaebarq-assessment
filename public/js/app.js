@@ -1972,6 +1972,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HasError.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HasError.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "has-error",
+  props: {
+    field: {
+      type: String,
+      required: true
+    }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["hasError", "getErrorMsg"])
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagination.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pagination.vue?vue&type=script&lang=js& ***!
@@ -2070,6 +2098,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Admin_components_HasError_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Admin/components/HasError.vue */ "./resources/js/components/HasError.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2181,9 +2210,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CreateVideo",
+  components: {
+    HasError: _Admin_components_HasError_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {};
   },
@@ -2214,7 +2262,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.addFile(files[0]);
     }
   }),
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getSingleVideo", "getThumb", "getFiles"])
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getSingleVideo", "getThumb", "getFiles", "hasError"])
 });
 
 /***/ }),
@@ -38749,6 +38797,35 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HasError.vue?vue&type=template&id=25d3040e&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HasError.vue?vue&type=template&id=25d3040e& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.hasError(_vm.field)
+    ? _c("div", {
+        staticClass: "help-block invalid-feedback",
+        domProps: { innerHTML: _vm._s(_vm.getErrorMsg(_vm.field)) }
+      })
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176& ***!
@@ -38965,6 +39042,8 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-8 offset-2" }, [
             _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c(
                   "form",
@@ -38992,38 +39071,55 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "custom-file mb-3" }, [
-                      _c("input", {
-                        staticClass: "custom-file-input",
-                        attrs: { type: "file", id: "validatedCustomFile" },
-                        on: { change: _vm.addThumb }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "custom-file-label",
-                          attrs: { for: "inputGroupFile02" }
-                        },
-                        [_vm._v(_vm._s(_vm.truncate(_vm.getThumb.name, 20)))]
-                      )
-                    ]),
+                    _c(
+                      "div",
+                      { staticClass: "custom-file mb-3" },
+                      [
+                        _c("input", {
+                          staticClass: "custom-file-input",
+                          class: { "is-invalid": _vm.hasError("image_url") },
+                          attrs: { type: "file", id: "image_url" },
+                          on: { change: _vm.addThumb }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "custom-file-label",
+                            attrs: { for: "image_url" }
+                          },
+                          [_vm._v(_vm._s(_vm.truncate(_vm.getThumb.name, 20)))]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", { attrs: { field: "image_url" } })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "custom-file mb-3" }, [
-                      _c("input", {
-                        attrs: { type: "file", id: "file" },
-                        on: { change: _vm.onInputChange }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "custom-file-label",
-                          attrs: { for: "file" }
-                        },
-                        [_vm._v("Upload Video")]
-                      )
-                    ]),
+                    _c(
+                      "div",
+                      { staticClass: "custom-file mb-3" },
+                      [
+                        _c("input", {
+                          staticClass: "custom-file-input",
+                          class: { "is-invalid": _vm.hasError("video_uri") },
+                          attrs: { type: "file", id: "video_uri" },
+                          on: { change: _vm.onInputChange }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "custom-file-label",
+                            attrs: { for: "video_uri" }
+                          },
+                          [_vm._v("Upload Video")]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", { attrs: { field: "video_uri" } })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group row" }, [
                       _c(
@@ -39035,55 +39131,66 @@ var render = function() {
                         [_vm._v("Type:")]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-sm-8" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.getSingleVideo.type,
-                                expression: "getSingleVideo.type"
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-8" },
+                        [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.getSingleVideo.type,
+                                  expression: "getSingleVideo.type"
+                                }
+                              ],
+                              staticClass: "custom-select",
+                              class: { "is-invalid": _vm.hasError("type") },
+                              attrs: { id: "type" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.getSingleVideo,
+                                    "type",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
-                            ],
-                            staticClass: "custom-select",
-                            attrs: { id: "type" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.getSingleVideo,
-                                  "type",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { disabled: "" } }, [
-                              _vm._v("Select one")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "free" } }, [
-                              _vm._v("Free")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "payed" } }, [
-                              _vm._v("Payed")
-                            ])
-                          ]
-                        )
-                      ])
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { selected: "", disabled: "" } },
+                                [_vm._v("Select one")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "free" } }, [
+                                _vm._v("Free")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "payed" } }, [
+                                _vm._v("Payed")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", { attrs: { field: "type" } })
+                        ],
+                        1
+                      )
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group row" }, [
@@ -39096,37 +39203,45 @@ var render = function() {
                         [_vm._v("Keyword:")]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-sm-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.getSingleVideo.keyword,
-                              expression: "getSingleVideo.keyword"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            placeholder: "Enter keyword",
-                            id: "keyword"
-                          },
-                          domProps: { value: _vm.getSingleVideo.keyword },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-8" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.getSingleVideo.keyword,
+                                expression: "getSingleVideo.keyword"
                               }
-                              _vm.$set(
-                                _vm.getSingleVideo,
-                                "keyword",
-                                $event.target.value
-                              )
+                            ],
+                            staticClass: "form-control",
+                            class: { "is-invalid": _vm.hasError("keyword") },
+                            attrs: {
+                              type: "text",
+                              placeholder: "Enter keyword",
+                              id: "keyword"
+                            },
+                            domProps: { value: _vm.getSingleVideo.keyword },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.getSingleVideo,
+                                  "keyword",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        })
-                      ])
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", { attrs: { field: "keyword" } })
+                        ],
+                        1
+                      )
                     ]),
                     _vm._v(" "),
                     _c(
@@ -39169,6 +39284,14 @@ var staticRenderFns = [
           ])
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Quick Form")])
     ])
   }
 ]
@@ -55877,6 +56000,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DataTable_vue_vue_type_template_id_4b997e69___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DataTable_vue_vue_type_template_id_4b997e69___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/HasError.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/HasError.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HasError_vue_vue_type_template_id_25d3040e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HasError.vue?vue&type=template&id=25d3040e& */ "./resources/js/components/HasError.vue?vue&type=template&id=25d3040e&");
+/* harmony import */ var _HasError_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HasError.vue?vue&type=script&lang=js& */ "./resources/js/components/HasError.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HasError_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HasError_vue_vue_type_template_id_25d3040e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HasError_vue_vue_type_template_id_25d3040e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/HasError.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/HasError.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/HasError.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HasError_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./HasError.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HasError.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HasError_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/HasError.vue?vue&type=template&id=25d3040e&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/HasError.vue?vue&type=template&id=25d3040e& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HasError_vue_vue_type_template_id_25d3040e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./HasError.vue?vue&type=template&id=25d3040e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HasError.vue?vue&type=template&id=25d3040e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HasError_vue_vue_type_template_id_25d3040e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HasError_vue_vue_type_template_id_25d3040e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
