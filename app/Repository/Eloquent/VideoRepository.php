@@ -7,6 +7,8 @@ use App\Repository\VideoRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class VideoRepository extends BaseRepository implements VideoRepositoryInterface
 {
@@ -25,27 +27,63 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
     */
    public function paginate(): LengthAwarePaginator
    {
-       return $this->model->paginate();    
+       return $this->model->orderBy('id', 'DESC')->paginate(10);    
    }
+
+    /**
+    * @return Collection
+    */
+    public function all(): Collection
+    {
+        return $this->model->all();    
+    }
 
     /**
     * @param array $attributes
     *
-    * @return Model
+    * @return Model|null
     */
-    public function create(array $attributes): Model
+    public function create(array $attributes)
     {
         $attributes['created_by'] = auth()->user()->id;
         $video = $this->model->create($attributes);
 
         if (request()->has('image_url')) {
-            $this->uploadthumb($video);
+            $imageUrl = $this->uploadthumb($video);
+            if($imageUrl == false){
+                $video->delete();
+                return [
+                    'status' => false,
+                    'errors' => [
+                        'image_url' => ['Warng was happen when image upload.']
+                    ],
+                    'data' => null
+                ];
+            }
         }
-
         if (request()->has('video_uri')) {
-            $this->uploadVideo($video);
+            $videoUri = $this->uploadVideo($video);
+            if($videoUri == false){
+                $video->delete();
+                return [
+                    'status' => false,
+                    'errors' => [
+                        'video_uri' => ['Warng was happen when video upload.']
+                    ],
+                    'data' => null
+                ];
+            }
         }
-        return $video;    
+        $video->update([
+            'image_url' => $imageUrl,
+            'video_uri' => $videoUri
+        ]);
+
+        return [
+            'status' => true, 
+            'data' => $video,
+            'errors' => null
+        ];    
     }
 
     /**
@@ -67,12 +105,13 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
         $path = $image->storeAs('public',  $fileNameToStore);
         $image->move(base_path('\public\images'), $fileNameToStore);
         $fileNameToStore = Str::replaceFirst('public/', '', $path);
-        
-        $video->update([
-            'image_url' => $fileNameToStore
-        ]);
 
-        return $video;
+        if(file_exists(public_path().'/images/'. $fileNameToStore) && Storage::exists('public/' . $fileNameToStore)){
+            Storage::delete('public/' . $fileNameToStore);
+            return $fileNameToStore;
+        }
+
+        return null;
     }
 
     /**
@@ -94,11 +133,12 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
         $path = $file->storeAs('public',  $fileNameToStore);
         $file->move(base_path('\public\videos'), $fileNameToStore);
         $fileNameToStore = Str::replaceFirst('public/', '', $path);
-        
-        $video->update([
-            'video_uri' => $fileNameToStore
-        ]);
 
-        return $video;
+        if(file_exists(public_path().'/videos/'. $fileNameToStore) && Storage::exists('public/' . $fileNameToStore)){
+            Storage::delete('public/' . $fileNameToStore);
+            return $fileNameToStore;
+        }
+        
+        return null;
     }
 }
