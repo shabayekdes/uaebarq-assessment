@@ -112,7 +112,7 @@ export default {
             formData.append(key, value);
         }
         this.getFiles.forEach(file => {
-            formData.append("video_url", file, file.name);
+            formData.append("video_uri", file, file.name);
         });
         if (this.getThumb.file) {
             formData.append("image_url", this.getThumb.file);

@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->string('video_uri');
             $table->string('image_url');
-            $table->boolean('is_send_notification');
+            $table->boolean('is_send_notification')->default(false);
             $table->string('keyword');
             $table->enum('type', ['free', 'payed'])->default('free');
             $table->foreignId('created_by')->references('id')->on('users')->onDelete('cascade');

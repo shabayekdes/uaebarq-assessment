@@ -2200,7 +2200,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       this.getFiles.forEach(function (file) {
-        formData.append("video_url", file, file.name);
+        formData.append("video_uri", file, file.name);
       });
 
       if (this.getThumb.file) {
