@@ -14,6 +14,15 @@ class Video extends Model
      */
     protected $guarded = [];
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $cast = [
+        'is_send_notification' => 'boolean'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');

@@ -1,6 +1,10 @@
+import router from "@Admin/router";
+
 const state = {
     videos: [],
-    video: {}
+    video: {
+        type: ""
+    }
 };
 
 const getters = {
@@ -25,12 +29,18 @@ const actions = {
             };
             const response = await axios.post(`${urlApi}video`, data, config);
 
-            commit("NEW_VIDEO", response.data);
+            commit("NEW_VIDEO", response);
+            commit("RESET_NEW_VIDEO")
+            dispatch("resetVideo")
             router.push("/admin/videos");
         } catch (e) {
             commit("SET_ERRORS", e.response.data.errors);
         }
     },
+    resetVideo({ commit, dispatch }) {
+        commit("RESET_NEW_VIDEO");
+        dispatch("resetImages", { root: true });
+    }
 };
 
 const mutations = {
@@ -39,6 +49,11 @@ const mutations = {
     },
     NEW_VIDEO: (state, data) => {
         state.videos.unshift(data);
+    },
+    RESET_NEW_VIDEO: state => {
+        state.video = {
+            type: ""
+        };
     }
 };
 

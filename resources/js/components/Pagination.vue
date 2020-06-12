@@ -6,7 +6,7 @@
         id="example1_info"
         role="status"
         aria-live="polite"
-      >Showing {{ meta_data.current_page }} to {{ meta_data.to }} of {{ meta_data.total }} entries</div>
+      >Showing {{ meta_data.from }} to {{ meta_data.to }} of {{ meta_data.total }} entries</div>
     </div>
     <div class="col-sm-12 col-md-7" v-if="meta_data.last_page > 1">
       <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">

@@ -13,8 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    <a href="/admin/videos" class="btn btn-success">
+                    <i class="nav-icon fas fa-cloud-upload-alt"></i>
+                        Admin panel
+                    </a>
                 </div>
             </div>
         </div>

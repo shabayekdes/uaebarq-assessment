@@ -43,9 +43,13 @@
                         type="file"
                         @change="addThumb"
                         class="custom-file-input"
+                        aria-describedby="imageHelpInline"
                         :class="{ 'is-invalid': hasError('image_url') }"
                         id="image_url" />
                         <label class="custom-file-label" for="image_url">{{ getThumb.name }}</label>
+                        <small id="imageHelpInline" class="text-muted">
+                            Image should be less size 2MB
+                        </small>
                         <has-error field="image_url"></has-error>
                     </div>
                     
@@ -53,11 +57,15 @@
                         <input 
                         type="file" 
                         id="video_uri" 
+                        aria-describedby="videoHelpInline"
                         @change="onInputChange" 
                         class="custom-file-input"
                         :class="{ 'is-invalid': hasError('video_uri') }" />
                         <label class="custom-file-label" v-if="getFiles.length == 0" for="video_uri">Upload Video</label>
                         <label class="custom-file-label" v-else for="video_uri" v-text="getFiles[0].name"></label>
+                        <small id="videoHelpInline" class="text-muted">
+                            Video should be with ext mp4 or avi with max size 20MB
+                        </small>
                         <has-error field="video_uri"></has-error>
                     </div>
 
@@ -69,7 +77,7 @@
                                 v-model="getSingleVideo.type"
                                 :class="{ 'is-invalid': hasError('type') }"
                                 class="custom-select">
-                                <option selected disabled>Select one</option>
+                                <option value disabled>Select one</option>
                                 <option value="free">Free</option>
                                 <option value="payed">Payed</option>
                             </select>
@@ -86,9 +94,9 @@
                                 :class="{ 'is-invalid': hasError('keyword') }"
                                 class="form-control"
                                 placeholder="Enter keyword"
-                                aria-describedby="passwordHelpInline"
+                                aria-describedby="keywordHelpInline"
                                 id="keyword"/>
-                                <small id="passwordHelpInline" class="text-muted">
+                                <small id="keywordHelpInline" class="text-muted">
                                     Sperate between keyword with , char.
                                 </small>
                             <has-error field="keyword"></has-error>
@@ -96,7 +104,9 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <router-link :to="{ name: 'videos.index' }" class="btn btn-danger">
+                      Cancel
+                    </router-link>
                 </form>
             </div>
             <!-- /.card-body -->
@@ -112,7 +122,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import HasError from "@Admin/components/HasError.vue";
 
 export default {
@@ -128,6 +138,7 @@ export default {
     ...mapActions([
         "storeVideo",
         "addThumb",
+        "resetVideo",
         "addFile"
     ]),
     createVideo(){
@@ -149,6 +160,9 @@ export default {
       const files = e.target.files;
       this.addFile(files[0]);
     },
+  },
+  created() {
+    this.resetVideo();
   },
   computed: mapGetters(["getSingleVideo", "getThumb", "getFiles", "hasError"])
 };

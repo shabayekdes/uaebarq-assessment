@@ -48,7 +48,10 @@ class VideoController extends Controller
     public function store(storeVideoRequest $request)
     {
         $video = $this->videoRepository->create($request->all());
-        return new VideoResource($video);    
+        if($video['status'] == false){
+            return response()->json(['status' => false ,'data'=> null, 'message' => 'List videos','errors' => $video['errors']], 422);
+        }
+        return new VideoResource($video['data']);    
     }
 
     /**

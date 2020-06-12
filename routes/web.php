@@ -21,6 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/sendWithGuzzle', 'Admin\SendVideoController@sendWithGuzzle');
+Route::get('/sendWithCurl', 'Admin\SendVideoController@sendWithCurl');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/{path?}', 'Admin\DashboardController@index')->name('admin')->where('path', '.*');
 });

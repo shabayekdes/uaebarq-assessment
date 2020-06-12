@@ -16,7 +16,7 @@ class VideoResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image_url' => $this->image_url,
+            'image_url' => file_exists(public_path().'/images/'. $this->image_url) ? $this->image_url : null,
             'keyword' => $this->keyword,
             'type' => ucfirst($this->type),
             'created_by' => $this->user->name,

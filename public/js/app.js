@@ -2230,6 +2230,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2240,7 +2250,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["storeVideo", "addThumb", "addFile"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["storeVideo", "addThumb", "resetVideo", "addFile"])), {}, {
     createVideo: function createVideo() {
       var formData = new FormData();
 
@@ -2269,6 +2279,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.addFile(files[0]);
     }
   }),
+  created: function created() {
+    this.resetVideo();
+  },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getSingleVideo", "getThumb", "getFiles", "hasError"])
 });
 
@@ -38859,7 +38872,7 @@ var render = function() {
         [
           _vm._v(
             "Showing " +
-              _vm._s(_vm.meta_data.current_page) +
+              _vm._s(_vm.meta_data.from) +
               " to " +
               _vm._s(_vm.meta_data.to) +
               " of " +
@@ -39085,7 +39098,11 @@ var render = function() {
                         _c("input", {
                           staticClass: "custom-file-input",
                           class: { "is-invalid": _vm.hasError("image_url") },
-                          attrs: { type: "file", id: "image_url" },
+                          attrs: {
+                            type: "file",
+                            "aria-describedby": "imageHelpInline",
+                            id: "image_url"
+                          },
                           on: { change: _vm.addThumb }
                         }),
                         _vm._v(" "),
@@ -39096,6 +39113,19 @@ var render = function() {
                             attrs: { for: "image_url" }
                           },
                           [_vm._v(_vm._s(_vm.getThumb.name))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "text-muted",
+                            attrs: { id: "imageHelpInline" }
+                          },
+                          [
+                            _vm._v(
+                              "\r\n                            Image should be less size 2MB\r\n                        "
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _c("has-error", { attrs: { field: "image_url" } })
@@ -39110,7 +39140,11 @@ var render = function() {
                         _c("input", {
                           staticClass: "custom-file-input",
                           class: { "is-invalid": _vm.hasError("video_uri") },
-                          attrs: { type: "file", id: "video_uri" },
+                          attrs: {
+                            type: "file",
+                            id: "video_uri",
+                            "aria-describedby": "videoHelpInline"
+                          },
                           on: { change: _vm.onInputChange }
                         }),
                         _vm._v(" "),
@@ -39130,6 +39164,19 @@ var render = function() {
                                 textContent: _vm._s(_vm.getFiles[0].name)
                               }
                             }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "text-muted",
+                            attrs: { id: "videoHelpInline" }
+                          },
+                          [
+                            _vm._v(
+                              "\r\n                            Video should be with ext mp4 or avi with max size 20MB\r\n                        "
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("has-error", { attrs: { field: "video_uri" } })
                       ],
@@ -39188,7 +39235,7 @@ var render = function() {
                             [
                               _c(
                                 "option",
-                                { attrs: { selected: "", disabled: "" } },
+                                { attrs: { value: "", disabled: "" } },
                                 [_vm._v("Select one")]
                               ),
                               _vm._v(" "),
@@ -39236,7 +39283,7 @@ var render = function() {
                             attrs: {
                               type: "text",
                               placeholder: "Enter keyword",
-                              "aria-describedby": "passwordHelpInline",
+                              "aria-describedby": "keywordHelpInline",
                               id: "keyword"
                             },
                             domProps: { value: _vm.getSingleVideo.keyword },
@@ -39258,7 +39305,7 @@ var render = function() {
                             "small",
                             {
                               staticClass: "text-muted",
-                              attrs: { id: "passwordHelpInline" }
+                              attrs: { id: "keywordHelpInline" }
                             },
                             [
                               _vm._v(
@@ -39283,14 +39330,19 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c(
-                      "button",
+                      "router-link",
                       {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit", "data-dismiss": "modal" }
+                        staticClass: "btn btn-danger",
+                        attrs: { to: { name: "videos.index" } }
                       },
-                      [_vm._v("Cancel")]
+                      [
+                        _vm._v(
+                          "\r\n                      Cancel\r\n                    "
+                        )
+                      ]
                     )
-                  ]
+                  ],
+                  1
                 )
               ])
             ])
@@ -39376,7 +39428,7 @@ var render = function() {
                           _vm._v(
                             "\r\n                  Add New\r\n                  "
                           ),
-                          _c("i", { staticClass: "fas fa-cart-plus" })
+                          _c("i", { staticClass: "fas fa-cloud-upload-alt" })
                         ]
                       )
                     ],
@@ -39425,16 +39477,17 @@ var render = function() {
                                           staticClass:
                                             "img-circle img-size-64 mr-2",
                                           attrs: {
-                                            src: "/img/default-150x150.png",
-                                            alt: "Product"
+                                            src:
+                                              "/images/no_photo_available.png",
+                                            alt: "image_url"
                                           }
                                         })
                                       : _c("img", {
                                           staticClass:
                                             "img-circle img-size-64 mr-2",
                                           attrs: {
-                                            src: video.image_url,
-                                            alt: "Product"
+                                            src: "/images/" + video.image_url,
+                                            alt: "image_url"
                                           }
                                         })
                                   ]),
@@ -56453,9 +56506,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     getMetaData: function getMetaData(state) {
       return state.meta_data;
     },
-    getLoading: function getLoading(state) {
-      return state.loading;
-    },
     getErrorMsg: function getErrorMsg(state) {
       return function (field) {
         if (state.errors.hasOwnProperty(field)) {
@@ -56477,6 +56527,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   mutations: {
     SET_META_DATA: function SET_META_DATA(state, data) {
+      state.meta_data.from = data.meta.from;
+      state.meta_data.to = data.meta.to;
+      state.meta_data.total = data.meta.total;
       state.meta_data.last_page = data.meta.last_page;
       state.meta_data.current_page = data.meta.current_page;
       state.meta_data.prev_page_url = data.links.prev;
@@ -56609,15 +56662,19 @@ var mutations = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Admin_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Admin/router */ "./resources/js/router.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+
 var state = {
   videos: [],
-  video: {}
+  video: {
+    type: ""
+  }
 };
 var getters = {
   getAllVideos: function getAllVideos(state) {
@@ -56676,23 +56733,33 @@ var actions = {
 
             case 5:
               response = _context2.sent;
-              commit("NEW_VIDEO", response.data);
-              router.push("/admin/videos");
-              _context2.next = 13;
+              commit("NEW_VIDEO", response);
+              commit("RESET_NEW_VIDEO");
+              dispatch("resetVideo");
+              _Admin_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/admin/videos");
+              _context2.next = 15;
               break;
 
-            case 10:
-              _context2.prev = 10;
+            case 12:
+              _context2.prev = 12;
               _context2.t0 = _context2["catch"](1);
               commit("SET_ERRORS", _context2.t0.response.data.errors);
 
-            case 13:
+            case 15:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 10]]);
+      }, _callee2, null, [[1, 12]]);
     }))();
+  },
+  resetVideo: function resetVideo(_ref3) {
+    var commit = _ref3.commit,
+        dispatch = _ref3.dispatch;
+    commit("RESET_NEW_VIDEO");
+    dispatch("resetImages", {
+      root: true
+    });
   }
 };
 var mutations = {
@@ -56701,6 +56768,11 @@ var mutations = {
   },
   NEW_VIDEO: function NEW_VIDEO(state, data) {
     state.videos.unshift(data);
+  },
+  RESET_NEW_VIDEO: function RESET_NEW_VIDEO(state) {
+    state.video = {
+      type: ""
+    };
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

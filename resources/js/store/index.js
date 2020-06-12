@@ -16,7 +16,6 @@ export default new Vuex.Store({
     },
     getters: {
         getMetaData: state => state.meta_data,
-        getLoading: state => state.loading,
         getErrorMsg: state => field => {
             if (state.errors.hasOwnProperty(field)) {
                 return state.errors[field][0];
@@ -33,6 +32,9 @@ export default new Vuex.Store({
     },
     mutations: {
         SET_META_DATA: (state, data) => {
+            state.meta_data.from = data.meta.from;
+            state.meta_data.to = data.meta.to;
+            state.meta_data.total = data.meta.total;
             state.meta_data.last_page = data.meta.last_page;
             state.meta_data.current_page = data.meta.current_page;
             state.meta_data.prev_page_url = data.links.prev;

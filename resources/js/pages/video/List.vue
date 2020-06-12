@@ -24,7 +24,7 @@
               <div class="col-sm-12 col-md-7">
                 <router-link :to="{ name: 'video.create' }" class="btn btn-success float-right">
                   Add New
-                  <i class="fas fa-cart-plus"></i>
+                  <i class="fas fa-cloud-upload-alt"></i>
                 </router-link>
               </div>
             </div>
@@ -40,15 +40,15 @@
                       <td class="sorting_1">{{ video.id }}</td>
                       <td>
                         <img
-                          src="/img/default-150x150.png"
+                          src="/images/no_photo_available.png"
                           v-if="video.image_url == null"
-                          alt="Product"
+                          alt="image_url"
                           class="img-circle img-size-64 mr-2"
                         />
                         <img
-                          :src="video.image_url"
+                          :src="'/images/' + video.image_url"
                           v-else
-                          alt="Product"
+                          alt="image_url"
                           class="img-circle img-size-64 mr-2"
                         />
                       </td>
