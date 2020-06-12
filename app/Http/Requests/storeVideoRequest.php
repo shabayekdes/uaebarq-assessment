@@ -25,7 +25,7 @@ class storeVideoRequest extends FormRequest
     {
         return [
             'image_url' => 'required|image',
-            'video_uri' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime',
+            'video_uri' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4',
             'type' => 'required',
             'keyword' => 'required',
         ];
