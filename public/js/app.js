@@ -2225,6 +2225,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2247,9 +2252,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         formData.append(key, value);
       }
 
-      this.getFiles.forEach(function (file) {
-        formData.append("video_uri", file, file.name);
-      });
+      if (this.getFiles.length > 0) {
+        this.getFiles.forEach(function (file) {
+          formData.append("video_uri", file, file.name);
+        });
+      }
 
       if (this.getThumb.file) {
         formData.append("image_url", this.getThumb.file);
@@ -39088,7 +39095,7 @@ var render = function() {
                             staticClass: "custom-file-label",
                             attrs: { for: "image_url" }
                           },
-                          [_vm._v(_vm._s(_vm.truncate(_vm.getThumb.name, 20)))]
+                          [_vm._v(_vm._s(_vm.getThumb.name))]
                         ),
                         _vm._v(" "),
                         _c("has-error", { attrs: { field: "image_url" } })
@@ -39107,14 +39114,22 @@ var render = function() {
                           on: { change: _vm.onInputChange }
                         }),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "custom-file-label",
-                            attrs: { for: "video_uri" }
-                          },
-                          [_vm._v("Upload Video")]
-                        ),
+                        _vm.getFiles.length == 0
+                          ? _c(
+                              "label",
+                              {
+                                staticClass: "custom-file-label",
+                                attrs: { for: "video_uri" }
+                              },
+                              [_vm._v("Upload Video")]
+                            )
+                          : _c("label", {
+                              staticClass: "custom-file-label",
+                              attrs: { for: "video_uri" },
+                              domProps: {
+                                textContent: _vm._s(_vm.getFiles[0].name)
+                              }
+                            }),
                         _vm._v(" "),
                         _c("has-error", { attrs: { field: "video_uri" } })
                       ],
@@ -39221,6 +39236,7 @@ var render = function() {
                             attrs: {
                               type: "text",
                               placeholder: "Enter keyword",
+                              "aria-describedby": "passwordHelpInline",
                               id: "keyword"
                             },
                             domProps: { value: _vm.getSingleVideo.keyword },
@@ -39237,6 +39253,19 @@ var render = function() {
                               }
                             }
                           }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              staticClass: "text-muted",
+                              attrs: { id: "passwordHelpInline" }
+                            },
+                            [
+                              _vm._v(
+                                "\r\n                                    Sperate between keyword with , char.\r\n                                "
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c("has-error", { attrs: { field: "keyword" } })
                         ],
@@ -56496,6 +56525,11 @@ var getters = {
 var actions = {
   addFile: function addFile(_ref, file) {
     var state = _ref.state;
+
+    if (!file.type.match("video.*")) {
+      return;
+    }
+
     state.files.push(file);
     var img = new Image(),
         reader = new FileReader();

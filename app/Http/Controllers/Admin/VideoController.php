@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repository\VideoRepositoryInterface; 
 use App\Http\Resources\VideoResource;
+use App\Http\Requests\storeVideoRequest;
 
 class VideoController extends Controller
 {
@@ -41,12 +42,13 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  storeVideoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeVideoRequest $request)
     {
-        return $this->videoRepository->create($request->all());    
+        $video = $this->videoRepository->create($request->all());
+        return new VideoResource($video);    
     }
 
     /**

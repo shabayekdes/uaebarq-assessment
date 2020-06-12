@@ -16,6 +16,9 @@ const getters = {
 
 const actions = {
     addFile({ state }, file) {
+        if (!file.type.match("video.*")) {
+            return;
+        }
         state.files.push(file);
         const img = new Image(),
             reader = new FileReader();

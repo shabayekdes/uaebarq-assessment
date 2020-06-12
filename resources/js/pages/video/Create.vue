@@ -45,7 +45,7 @@
                         class="custom-file-input"
                         :class="{ 'is-invalid': hasError('image_url') }"
                         id="image_url" />
-                        <label class="custom-file-label" for="image_url">{{ truncate(getThumb.name,20) }}</label>
+                        <label class="custom-file-label" for="image_url">{{ getThumb.name }}</label>
                         <has-error field="image_url"></has-error>
                     </div>
                     
@@ -56,7 +56,8 @@
                         @change="onInputChange" 
                         class="custom-file-input"
                         :class="{ 'is-invalid': hasError('video_uri') }" />
-                        <label class="custom-file-label" for="video_uri">Upload Video</label>
+                        <label class="custom-file-label" v-if="getFiles.length == 0" for="video_uri">Upload Video</label>
+                        <label class="custom-file-label" v-else for="video_uri" v-text="getFiles[0].name"></label>
                         <has-error field="video_uri"></has-error>
                     </div>
 
@@ -85,7 +86,11 @@
                                 :class="{ 'is-invalid': hasError('keyword') }"
                                 class="form-control"
                                 placeholder="Enter keyword"
+                                aria-describedby="passwordHelpInline"
                                 id="keyword"/>
+                                <small id="passwordHelpInline" class="text-muted">
+                                    Sperate between keyword with , char.
+                                </small>
                             <has-error field="keyword"></has-error>
                         </div>
                     </div>
@@ -130,9 +135,11 @@ export default {
         for (const [key, value] of Object.entries(this.getSingleVideo)) {
             formData.append(key, value);
         }
-        this.getFiles.forEach(file => {
-            formData.append("video_uri", file, file.name);
-        });
+        if (this.getFiles.length > 0) {
+            this.getFiles.forEach(file => {
+                formData.append("video_uri", file, file.name);
+            });
+        }
         if (this.getThumb.file) {
             formData.append("image_url", this.getThumb.file);
         }
